@@ -19,5 +19,18 @@ public class Inventory {
             new Eyeglass(16, "EO Eyewear Carrie", "Stainless steel", 2580.00, "Round", "S. Olive, S.Gun/Purple"),
         };
         return eyeglasses;
+
+    public static AddOn[] getAddOns() {
+        AddOn[] addOns = {
+            new AddOn(1,"Anti-glare coating",1000.0 ),
+            new AddOn(2,"Blue Light Filter",1900.0 ),
+            new AddOn(3,"Photochromic Lenses",2000.0 ),
+            new AddOn(4,"Scratch-resistant coating",300.0 ),
+            new AddOn(5,"High-index lenses",3000.0 ),
+            new AddOn(6,"Polarized glasses",2500.0 ),
+            new AddOn(7,"UV Protection",300.0 ),
+        };
+        return addOns;
     }
+    
 }
