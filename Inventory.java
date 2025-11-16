@@ -19,7 +19,7 @@ public class Inventory {
             new Eyeglass(16, "EO Eyewear Carrie", "Stainless steel", 2580.00, "Round", "S. Olive, S.Gun/Purple"),
         };
         return eyeglasses;
-
+    }
     public static AddOn[] getAddOns() {
         AddOn[] addOns = {
             new AddOn(1,"Anti-glare coating",1000.0 ),
@@ -32,5 +32,27 @@ public class Inventory {
         };
         return addOns;
     }
-    
+
+         public static Contacts[] getContacts() {
+        	Contacts[] contacts = {
+        			new Contacts(1, "ESY Acuvue Moist", "(Daily/30 Lenses)", 400.0),
+        			new Contacts(2,"ESY Acuvue Oasys","(Once a Month/6 Lenses)", 2000.0),
+        			new Contacts(3,"ESY Acuvue Oasys Astigmatism", "(Once a Month/6 Lenses)", 3000.0),
+        			new Contacts(4,"ESY Air Optix", "(Once a Month/3 Lenses)", 1500.0),
+        			new Contacts(5,"ESY Air Optix Astigmatism", "(Once a Month/3 Lenses)", 2000.0),
+        			new Contacts(6,"ESY Dailies Total Astigmatism", "(Daily/30 Lenses)", 500.0),
+        			new Contacts(7,"ESY Easyvision Elision", "(Daily/30 Lenses)", 500.0),
+        			new Contacts(8,"ESY Easyvision Irisian", "(Once a Month/3 Lenses)", 1500.0),
+        			new Contacts(9,"ESY Easyvision Linerial", "(Daily/30 Lenses)", 500.0),
+        			new Contacts(10,"ESY Easyvision Serima", "(Daily/30 Lenses)", 500.0),
+       				new Contacts(11,"ESY Easyvision Soria", "(Daily/30 Lenses)", 500.0),
+   					new Contacts(12,"ESY Easyvision Vitrea", "(Daily/30 Lenses)", 500.0),
+      				new Contacts(13,"ESY Lumiere", "(Once a Week/12 Lenses)", 1000.0),
+       				new Contacts(14,"ESY Precision", "(Daily/30 Lenses)", 500.0),
+      				new Contacts(15,"ESY Precision Astigmatism", "(Daily/30 Lenses)", 1000.0),
+     				new Contacts(16,"ESY Proclear", "(Once a Month/3 Lenses)", 1000.0),
+      				new Contacts(17,"ESY Proclear Toric", "(Once a Month/3 Lenses)", 1000.0)
+            };
+            return contacts;
+    }
 }
