@@ -3,6 +3,13 @@ import java.util.*;
 public class Orderingsystem {
   public static void main(String[] args){
     Scanner sc = new Scanner(System.in);
+    
+    //Initialize variables
+    int dashboardChoice = 0;
+    int eyeglassChoice = 0;
+
+    boolean exitAppChoice = true;
+    boolean exitDashboardChoice = true;
 
     // Initialize eyeglasses
     Eyeglass[] eyeglasses = Inventory.getEyeglasses();
@@ -25,6 +32,87 @@ public class Orderingsystem {
     String ContactLensName[] = new String[contacts.length];
     String ContactLensDisposal[] = new String[contacts.length];
     double ContactLensPrices[] = new double[contacts.length];
+
+    while(exitAppChoice){
+      // Display welcome message
+      System.out.println("Welcome to the ESY Optical Ordering System!");
+
+      //Display Dashboard
+      System.out.println("Please select a category to browse:");
+      System.out.println("[1]Eyeglasses [2]Contact Lenses [3]Accessories");
+      System.out.print("Enter your choice[1-3]: ");
+      dashboardChoice = sc.nextInt();
+
+      while(exitDashboardChoice){
+        // Process eyeglass choices
+        switch(dashboardChoice){
+          case 1:
+            exitDashboardChoice = true;
+            System.out.println("Available Eyeglasses:");
+            for (int i = 0, j = 1; i < eyeglasses.length; i++, j++) {
+              System.out.printf("[%-2d] %-30s Php%-8.2f", j, eyeglasses[i].getName(), eyeglasses[i].getPrice());
+              System.out.print("   ");
+              if (j % 3 == 0) {
+                System.out.println();
+              }
+            } 
+      // Add newline if the last row isn't complete
+      if (eyeglasses.length % 3 != 0) {
+        System.out.println();
+      }
+        }
+
+        // Exit eyeglass choice loop
+        System.out.println("Do you want to go back to the main menu? [Y/N]: ");
+        String backChoice = sc.next();
+        if (backChoice.equalsIgnoreCase("Y")) {
+            exitDashboardChoice = false;
+        }
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+      // Exit the application
+      System.out.println("Do you want to continue shopping? [Y/N]: ");
+      String exitChoice = sc.next();
+      if (exitChoice.equalsIgnoreCase("N")) {
+          exitAppChoice = false;
+          System.out.println("Thank you for using the ESY Optical Ordering System. Goodbye!");
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // // Test display of eyeglasses
     // System.out.println("Available Eyeglasses:");
