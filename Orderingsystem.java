@@ -9,7 +9,7 @@ public class Orderingsystem {
     int eyeglassChoice = 0;
 
     boolean exitAppChoice = true;
-    boolean exitDashboardChoice = true;
+    boolean exitDashboardChoice;
 
     // Initialize eyeglasses
     Eyeglass[] eyeglasses = Inventory.getEyeglasses();
@@ -41,13 +41,13 @@ public class Orderingsystem {
       System.out.println("Please select a category to browse:");
       System.out.println("[1]Eyeglasses [2]Contact Lenses [3]Accessories");
       System.out.print("Enter your choice[1-3]: ");
+      exitDashboardChoice = true;
       dashboardChoice = sc.nextInt();
 
       while(exitDashboardChoice){
         // Process eyeglass choices
         switch(dashboardChoice){
           case 1:
-            exitDashboardChoice = true;
             System.out.println("Available Eyeglasses:");
             for (int i = 0, j = 1; i < eyeglasses.length; i++, j++) {
               System.out.printf("[%-2d] %-30s Php%-8.2f", j, eyeglasses[i].getName(), eyeglasses[i].getPrice());
@@ -63,9 +63,9 @@ public class Orderingsystem {
         }
 
         // Exit eyeglass choice loop
-        System.out.println("Do you want to go back to the main menu? [Y/N]: ");
+        System.out.println("Go back to dashboard [X]: ");
         String backChoice = sc.next();
-        if (backChoice.equalsIgnoreCase("Y")) {
+        if (backChoice.equalsIgnoreCase("X")) {
             exitDashboardChoice = false;
         }
       }
