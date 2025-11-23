@@ -1,6 +1,13 @@
 import java.util.*;
 
 public class Orderingsystem {
+
+  // Method to clear the console screen
+  public static void clearScreen() {
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+  }
+
   public static void main(String[] args){
     Scanner sc = new Scanner(System.in);
     
@@ -33,7 +40,10 @@ public class Orderingsystem {
     String ContactLensDisposal[] = new String[contacts.length];
     double ContactLensPrices[] = new double[contacts.length];
 
+    
+
     while(exitAppChoice){
+      clearScreen();  
       // Display welcome message
       System.out.println("Welcome to the ESY Optical Ordering System!");
 
@@ -45,6 +55,7 @@ public class Orderingsystem {
       dashboardChoice = sc.nextInt();
 
       while(exitDashboardChoice){
+        clearScreen();
         // Process eyeglass choices
         switch(dashboardChoice){
           case 1:
@@ -70,7 +81,7 @@ public class Orderingsystem {
         }
       }
 
-
+      clearScreen();
 
 
 
@@ -86,6 +97,8 @@ public class Orderingsystem {
       String exitChoice = sc.next();
       if (exitChoice.equalsIgnoreCase("N")) {
           exitAppChoice = false;
+          sc.close();
+          clearScreen();
           System.out.println("Thank you for using the ESY Optical Ordering System. Goodbye!");
       }
     }
