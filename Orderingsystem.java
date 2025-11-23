@@ -6,7 +6,6 @@ public class Orderingsystem {
 
     // Initialize eyeglasses
     Eyeglass[] eyeglasses = Inventory.getEyeglasses();
-
     int IDS[] = new int[eyeglasses.length];
     String Names[] = new String[eyeglasses.length];
     double Prices[] = new double[eyeglasses.length];
@@ -37,7 +36,7 @@ public class Orderingsystem {
       FrameShapes[i] = eyeglasses[i].getFrameType();
       Colors[i] = eyeglasses[i].getColor();
 
-      System.out.println(eyeglasses[i].getName());
+      System.out.println(Names[i]);
       System.out.println(IDS[i]);
       System.out.println(Names[i]);
       System.out.println(Prices[i]);
