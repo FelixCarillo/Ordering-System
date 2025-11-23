@@ -53,7 +53,7 @@ public class Orderingsystem {
     	AddOnNames[i] =AddOns[i].getAddOnNames();
     	AddOnPrices[i] =AddOns[i].getAddOnPrices();
 
-      System.out.println(AddOns[i].getAddOnNames());
+      System.out.println(AddOnNames[i]);
       System.out.println(AddOnIDs[i]);
       System.out.println(AddOnNames[i]);
       System.out.println(AddOnPrices[i]);
@@ -68,7 +68,7 @@ public class Orderingsystem {
     	ContactLensDisposal[i] =contacts[i].getContactLensDisposal();
     	ContactLensPrices[i] =contacts[i].getContactLensPrices();
 
-      System.out.println(contacts[i].getContactLensName());
+      System.out.println(ContactLensName[i]);
       System.out.println(ContactLensID[i]);
       System.out.println(ContactLensDisposal[i]);
       System.out.println(ContactLensPrices[i]);
