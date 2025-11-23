@@ -12,11 +12,17 @@ public class Orderingsystem {
     Scanner sc = new Scanner(System.in);
     
     //Initialize variables
+    // Integers for choices
     int dashboardChoice = 0;
     int eyeglassChoice = 0;
 
+    // Booleans for loops
     boolean exitAppChoice = true;
     boolean exitDashboardChoice;
+
+    // Customer details
+    String customerName = "";
+    String customerAge = "";
 
     // Initialize eyeglasses
     Eyeglass[] eyeglasses = Inventory.getEyeglasses();
@@ -47,6 +53,16 @@ public class Orderingsystem {
       // Display welcome message
       System.out.println("Welcome to the ESY Optical Ordering System!");
 
+      // Get customer details if empty
+      if (customerName.isEmpty()) {
+        System.out.print("Please enter your name: ");
+        customerName = sc.nextLine();
+      }
+      if (customerAge.isEmpty()) {
+        System.out.print("Please enter your age: ");
+        customerAge = sc.nextLine();
+      }
+
       //Display Dashboard
       System.out.println("Please select a category to browse:");
       System.out.println("[1]Eyeglasses [2]Contact Lenses [3]Accessories");
@@ -67,10 +83,13 @@ public class Orderingsystem {
                 System.out.println();
               }
             } 
-      // Add newline if the last row isn't complete
-      if (eyeglasses.length % 3 != 0) {
-        System.out.println();
-      }
+            if (eyeglasses.length % 3 != 0) {
+              System.out.println();
+            }
+            ;
+          case 2:
+
+            ;
         }
 
         // Exit eyeglass choice loop
@@ -83,15 +102,6 @@ public class Orderingsystem {
 
       clearScreen();
 
-
-
-
-
-
-
-
-
-
       // Exit the application
       System.out.println("Do you want to continue shopping? [Y/N]: ");
       String exitChoice = sc.next();
@@ -102,78 +112,5 @@ public class Orderingsystem {
           System.out.println("Thank you for using the ESY Optical Ordering System. Goodbye!");
       }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // // Test display of eyeglasses
-    // System.out.println("Available Eyeglasses:");
-    // for (int i = 0; i < eyeglasses.length; i++){
-    //   IDS[i] = eyeglasses[i].getId();
-    //   Names[i] = eyeglasses[i].getName();
-    //   Prices[i] = eyeglasses[i].getPrice();
-    //   Materials[i] = eyeglasses[i].getMaterial();
-    //   FrameShapes[i] = eyeglasses[i].getFrameType();
-    //   Colors[i] = eyeglasses[i].getColor();
-
-    //   System.out.println(Names[i]);
-    //   System.out.println(IDS[i]);
-    //   System.out.println(Names[i]);
-    //   System.out.println(Prices[i]);
-    //   System.out.println(Materials[i]);
-    //   System.out.println(FrameShapes[i]);
-    //   System.out.println(Colors[i]);
-    //   System.out.println("-----------------------");
-    // }
-    //Test display for AddOns
-    // System.out.println("Available AddOns:");
-    // System.out.println(" ");
-    // for (int i = 0; i < AddOns.length; i++){
-    // 	AddOnIDs[i] =AddOns[i].getAddOnID();
-    // 	AddOnNames[i] =AddOns[i].getAddOnNames();
-    // 	AddOnPrices[i] =AddOns[i].getAddOnPrices();
-
-    //   System.out.println(AddOnNames[i]);
-    //   System.out.println(AddOnIDs[i]);
-    //   System.out.println(AddOnNames[i]);
-    //   System.out.println(AddOnPrices[i]);
-    //   System.out.println("-----------------------");
-    // }
-     //Test display for Contacts
-    // System.out.println("Available Contacts:");
-    // System.out.println(" ");
-    // for (int i = 0; i < contacts.length; i++){
-    // 	ContactLensID[i] =contacts[i].getContactLensID();
-    // 	ContactLensName[i] =contacts[i].getContactLensName();
-    // 	ContactLensDisposal[i] =contacts[i].getContactLensDisposal();
-    // 	ContactLensPrices[i] =contacts[i].getContactLensPrices();
-
-    //   System.out.println(ContactLensName[i]);
-    //   System.out.println(ContactLensID[i]);
-    //   System.out.println(ContactLensDisposal[i]);
-    //   System.out.println(ContactLensPrices[i]);
-    //   System.out.println("-----------------------");
-    // }
   }
 }
