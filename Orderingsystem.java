@@ -86,9 +86,20 @@ public class Orderingsystem {
             if (eyeglasses.length % 3 != 0) {
               System.out.println();
             }
-            ;
+            break;
           case 2:
-
+            System.out.println("Available Contact Lenses:");
+              for (int i = 0, j = 1; i < contacts.length; i++, j++) {
+                System.out.printf("[%-2d] %-30s Php%-8.2f", j, contacts[i].getContactLensName(), contacts[i].getContactLensPrices());
+                System.out.print("   ");
+                if (j % 3 == 0) {
+                  System.out.println();
+                }
+              } 
+              if (contacts.length % 3 != 0) {
+                System.out.println();
+              }
+            break;
             ;
         }
 
