@@ -4,3 +4,4 @@ Objectives:
 HI HELP
 Menu and Prices:
 hello
+try lng magcommit
