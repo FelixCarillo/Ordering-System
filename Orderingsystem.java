@@ -13,7 +13,7 @@ public class Orderingsystem {
         Scanner sc = new Scanner(System.in);
 
         //Initialize variables
-        String items[] = new String[100];
+        String items = "";
         double totalCost = 0.0;
 
         // Integers for choices
@@ -95,7 +95,7 @@ public class Orderingsystem {
                             int eyeglassIndex = Integer.parseInt(eyeglassChoice.substring(1)) - 1;
                             if (eyeglassIndex >= 0 && eyeglassIndex < eyeglasses.length) {
                                 Eyeglass selectedEyeglass = eyeglasses[eyeglassIndex];
-                                items[(int) totalCost] = selectedEyeglass.getName();
+                                items += selectedEyeglass.getName() + " - Php" + selectedEyeglass.getPrice() + "\n";
                                 totalCost += selectedEyeglass.getPrice();
                                 System.out.println("You have selected: " + selectedEyeglass.getName() + " - Php" + selectedEyeglass.getPrice());
                             } else {
