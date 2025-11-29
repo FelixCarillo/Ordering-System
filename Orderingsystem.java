@@ -231,6 +231,7 @@ public class Orderingsystem {
                     System.out.println("Would you like to add any add-ons? [Y/N]: ");
                     String addOnChoice = sc.next();
                     if (addOnChoice.equalsIgnoreCase("Y")) {
+                        clearScreen();
                         System.out.println("Available Add-Ons:");
                         for (int i = 0, j = 1; i < AddOns.length; i++, j++) {
                             System.out.printf("[D%-2d] %-30s Php%-8.2f", j, AddOns[i].getAddOnNames(), AddOns[i].getAddOnPrices());
@@ -261,13 +262,7 @@ public class Orderingsystem {
                         }
                     }
                 }
-
-                // Exit eyeglass choice loop
-                System.out.println("Go back to dashboard [X]: ");
-                String backChoice = sc.next();
-                if (backChoice.equalsIgnoreCase("X")) {
-                    exitDashboardChoice = false;
-                }
+                exitDashboardChoice = false;
 
                 clearScreen();
 
@@ -286,8 +281,9 @@ public class Orderingsystem {
                 double additionalCost = additionalCostUnits * 50.0; // Php50 for every 100 eye grade
                 totalCost += additionalCost;
                 if (additionalCostUnits > 0) {
-                    itemName += "Additional Eye Grade Charge";
-                    itemPrice += String.valueOf(additionalCost) + "\n";
+                    itemName += "Additional Eye Grade Charge,";
+                    itemPrice += String.valueOf(additionalCost) + ",";
+                    totalCost += additionalCost;
                 }
             }
 
@@ -297,20 +293,21 @@ public class Orderingsystem {
 
             // Display order summary
             if (!exitAppChoice && !itemName.isEmpty()) {
-                System.out.printf("%30","EYE SEE YOU OPTICAL");
-                System.out.printf("Customer Name(%s): %s\n", customerName, customerAge);
-                System.out.println("Order Summary:");
+                System.out.printf("%40s\n\n", "EYE SEE YOU OPTICAL");
+                System.out.printf("Customer Name(%s): %s\n\n", customerName, customerAge);
+                System.out.printf("%37s\n\n" ,"Order Summary:");
                 System.out.printf("%-30s | %15s%n", "Product Name", "Price");
+                System.out.println("-----------------------------------------------------");
                 for (int i = 0; i < itemNamesArray.length; i++) {
-                    if (!itemNamesArray[i].isEmpty()) {
-                        System.out.printf("%-30s | %15sPhp\n", itemNamesArray[i], itemPricesArray[i]);
-                    }
+                    System.out.printf("%-30s | %15sPhp\n", itemNamesArray[i], itemPricesArray[i]);
                 }
+                System.out.println("-----------------------------------------------------\n\n");
                 System.out.printf("Subtotal: Php%.2f\n", totalCost);
                 System.out.println("VAT(12%): Php" + String.format("%.2f", (totalCost * 0.12)));
-                System.out.printf("Total Amount Due: Php%.2f\n", (totalCost + (totalCost * 0.12)));
-                System.out.println("Thank you for your purchase!");
-                System.out.println("Take care of your eyes! See you soon!");
+                System.out.printf("Total Amount Due: Php%.2f\n\n", (totalCost + (totalCost * 0.12)));
+                System.out.println("-----------------------------------------------------\n");
+                System.out.printf("%40s\n","Thank you for your purchase!");
+                System.out.printf("%5s" ,"Take care of your eyes! See you soon!");
             } else if (!exitAppChoice && itemName.isEmpty()) {
                 System.out.println("No items were purchased. Thank you for visiting EYE SEE YOU OPTICAL!");
             }
