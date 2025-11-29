@@ -31,7 +31,7 @@ public class Orderingsystem {
 
         // Customer details
         String customerName = "";
-        String customerAge = "";
+        int customerAge = 0;
 
         // Initialize eyeglasses
         Eyeglass[] eyeglasses = Inventory.getEyeglasses();
@@ -65,9 +65,9 @@ public class Orderingsystem {
                 System.out.print("Please enter your name: ");
                 customerName = sc.nextLine();
             }
-            if (customerAge.isEmpty()) {
+            if (customerAge == 0) {
                 System.out.print("Please enter your age: ");
-                customerAge = sc.nextLine();
+                customerAge = sc.nextInt();
             }
 
             //Display Dashboard
@@ -113,6 +113,10 @@ public class Orderingsystem {
 
                         break;
                     case 2:
+                        if (customerAge < 18) {
+                            System.out.println("Note: Contact lenses are not recommended for individuals under 18 years old.");
+                            break;
+                        }
                         System.out.println("Available Contact Lenses:");
                         for (int i = 0, j = 1; i < contacts.length; i++, j++) {
                             System.out.printf("[C%-2d] %-30s Php%-8.2f", j, contacts[i].getContactLensName(), contacts[i].getContactLensPrices());
