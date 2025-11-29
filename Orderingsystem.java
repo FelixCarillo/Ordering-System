@@ -71,17 +71,24 @@ public class Orderingsystem {
                 System.out.print("Please enter your age: ");
                 customerAge = sc.nextInt();
             }
+            if (!customerName.isEmpty() && customerAge != 0) {
+                System.out.println("Do you have a prescription? [Y/N]: ");
+                String prescriptionInput = sc.next();
+                if (prescriptionInput.equals("Y") || prescriptionInput.equals("y")) {
+                    hasPrescription = true;
+                    System.out.println("Great! We can assist you with your prescription needs.");
+                    System.out.println("Could you please provide your eye grade? ");
+                    eyeGrade = sc.nextInt();
+                }
+            }
+            clearScreen();
+
+            // Display customer details
             System.out.println("Hello, " + customerName + "!");
             System.out.println("Age: " + customerAge);
             System.out.println();
-            System.out.println("Do you have a prescription? [Y/N]: ");
-            String prescriptionInput = sc.next();
-            if (prescriptionInput.equals("Y") || prescriptionInput.equals("y")) {
-                hasPrescription = true;
-                System.out.println("Great! We can assist you with your prescription needs.");
-                System.out.println("Could you please provide your eye grade? ");
-                eyeGrade = sc.nextInt();
-            }
+            
+            
 
             //Display Dashboard
             System.out.println("Please select a category to browse:");
