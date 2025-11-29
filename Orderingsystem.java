@@ -60,6 +60,7 @@ public class Orderingsystem {
 
         while (exitAppChoice) {
             clearScreen();
+            
             // Display welcome message
             System.out.println("Welcome to the ESY Optical Ordering System!");
 
@@ -72,7 +73,9 @@ public class Orderingsystem {
                 System.out.print("Please enter your age: ");
                 customerAge = sc.nextInt();
             }
-            if (!customerName.isEmpty() && customerAge != 0 && !hasPrescription) {
+
+            // Check for prescription
+            if (!hasPrescription && customerAge != 0 && !customerName.isEmpty()) {
                 System.out.println("Do you have a prescription? [Y/N]: ");
                 String prescriptionInput = sc.next();
                 if (prescriptionInput.equals("Y") || prescriptionInput.equals("y")) {
@@ -80,8 +83,27 @@ public class Orderingsystem {
                     System.out.println("Great! We can assist you with your prescription needs.");
                     System.out.println("Could you please provide your eye grade? ");
                     eyeGrade = sc.nextInt();
+                } else if (prescriptionInput.equals("N") || prescriptionInput.equals("n")) {
+                    hasPrescription = false;
+                    System.out.println("Do you like to get your eyes checked for 500php? [Y/N]: ");
+                    String eyeCheckInput = sc.next();
+                    if (eyeCheckInput.equals("Y") || eyeCheckInput.equals("y")) {
+                        hasPrescription = true;
+                        items += "Eye Checkup Service        Php500.00\n";
+                        totalCost += 500.00;
+                        System.out.println("Thank you! An eye check will be included in your order.");
+                        System.out.println("Could you please provide your eye grade? ");
+                        eyeGrade = sc.nextInt();
+                    } else if (eyeCheckInput.equals("N") || eyeCheckInput.equals("n")) {
+                        hasPrescription = false;
+                        System.out.println("No worries! You can still browse our selection.");
+                    }
+                } else {
+                    System.out.println("Invalid input. Please enter 'Y' for Yes or 'N' for No.");
                 }
             }
+
+
             clearScreen();
 
             // Display customer details
