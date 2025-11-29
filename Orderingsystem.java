@@ -29,6 +29,7 @@ public class Orderingsystem {
         boolean exitAppChoice = true;
         boolean exitDashboardChoice;
 
+
         // Customer details
         String customerName = "";
         int customerAge = 0;
@@ -71,7 +72,7 @@ public class Orderingsystem {
                 System.out.print("Please enter your age: ");
                 customerAge = sc.nextInt();
             }
-            if (!customerName.isEmpty() && customerAge != 0) {
+            if (!customerName.isEmpty() && customerAge != 0 && !hasPrescription) {
                 System.out.println("Do you have a prescription? [Y/N]: ");
                 String prescriptionInput = sc.next();
                 if (prescriptionInput.equals("Y") || prescriptionInput.equals("y")) {
