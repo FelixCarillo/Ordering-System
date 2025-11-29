@@ -63,26 +63,26 @@ public class Orderingsystem {
             clearScreen();
 
             // Display welcome message
-            System.out.println("Welcome to the ESY Optical Ordering System!");
+            System.out.println("\n\t\t\t\t\tWelcome to the ESY Optical Ordering System!\t\t\t\t\t");
 
             // Get customer details if empty
             if (customerName.isEmpty()) {
-                System.out.print("Please enter your name: ");
+                System.out.print("\n\nPlease enter your name:   ");
                 customerName = sc.nextLine();
             }
             if (customerAge == 0) {
-                System.out.print("Please enter your age: ");
+                System.out.print("Please enter your age:    ");
                 customerAge = sc.nextInt();
             }
 
             // Check for prescription
             if (!hasPrescription && customerAge != 0 && !customerName.isEmpty()) {
-                System.out.println("Do you have a prescription? [Y/N]: ");
+                System.out.print("\n\nDo you have a prescription? [Y/N]: ");
                 String prescriptionInput = sc.next();
                 if (prescriptionInput.equals("Y") || prescriptionInput.equals("y")) {
                     hasPrescription = true;
                     System.out.println("Great! We can assist you with your prescription needs.");
-                    System.out.println("Could you please provide your eye grade? ");
+                    System.out.print("\n\nCould you please provide your eye grade? ");
                     eyeGrade = sc.nextInt();
                 } else if (prescriptionInput.equals("N") || prescriptionInput.equals("n")) {
                     hasPrescription = false;
@@ -109,15 +109,15 @@ public class Orderingsystem {
             clearScreen();
 
             // Display customer details
-            System.out.println("Hello, " + customerName + "!");
-            System.out.println("Age: " + customerAge);
+            System.out.println("\n\n\t\t\t\t\t\t\tHello, " + customerName + "!");
+            System.out.println("\t\t\t\t\t\t\t " + customerAge + "yrs old");
             System.out.println();
             
             
 
             //Display Dashboard
-            System.out.println("Please select a category to browse:");
-            System.out.println("[1]Eyeglasses [2]Contact Lenses [3]Accessories");
+            System.out.println("\nPlease select a category to browse:");
+            System.out.println("[1] Eyeglasses [2] Contact Lenses [3] Accessories");
             System.out.print("Enter your choice[1-3]: ");
             exitDashboardChoice = true;
             dashboardChoice = sc.nextInt();
