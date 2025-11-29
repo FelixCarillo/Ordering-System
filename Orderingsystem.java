@@ -84,7 +84,7 @@ public class Orderingsystem {
                     case 1:
                         System.out.println("Available Eyeglasses:");
                         for (int i = 0, j = 1; i < eyeglasses.length; i++, j++) {
-                            System.out.printf("[E%-2d] %-30s Php%-8.2f", j, Names[i], Prices[i]);
+                            System.out.printf("[E%-2d] %-30s Php%-8.2f", j, eyeglasses[i].getName(), eyeglasses[i].getPrice());
                             System.out.print("   ");
                             if (j % 3 == 0) {
                                 System.out.println();
@@ -119,7 +119,7 @@ public class Orderingsystem {
                         }
                         System.out.println("Available Contact Lenses:");
                         for (int i = 0, j = 1; i < contacts.length; i++, j++) {
-                            System.out.printf("[C%-2d] %-30s Php%-8.2f", j, ContactLensName[i], ContactLensPrices[i]);
+                            System.out.printf("[C%-2d] %-30s Php%-8.2f", j, contacts[i].getContactLensName(), contacts[i].getContactLensPrices());
                             System.out.print("   ");
                             if (j % 3 == 0) {
                                 System.out.println();
@@ -166,9 +166,9 @@ public class Orderingsystem {
                             Accessories[] accessories = Inventory.getAccessories();
                             if (accessoriesIndex >= 0 && accessoriesIndex < accessories.length) {
                                 Accessories selectedAccessory = accessories[accessoriesIndex];
-                                items += selectedAccessory.getName() + " -       Php" + selectedAccessory.getPrice() + "\n";
+                                items += selectedAccessory.getName() + " - Php" + selectedAccessory.getPrice() + "\n";
                                 totalCost += selectedAccessory.getPrice();
-                                System.out.println("You have selected: " + selectedAccessory.getName() + " - Php" + selectedAccessory.getPrice());
+                                System.out.println("You have selected: " + selectedAccessory.getName() + "       - Php" + selectedAccessory.getPrice());
                             } else {
                                 System.out.println("Invalid accessory selection.");
                             }
