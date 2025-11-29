@@ -32,6 +32,8 @@ public class Orderingsystem {
         // Customer details
         String customerName = "";
         int customerAge = 0;
+        int eyeGrade = 20;
+        boolean hasPrescription = false;
 
         // Initialize eyeglasses
         Eyeglass[] eyeglasses = Inventory.getEyeglasses();
@@ -69,6 +71,17 @@ public class Orderingsystem {
                 System.out.print("Please enter your age: ");
                 customerAge = sc.nextInt();
             }
+            System.out.println("Hello, " + customerName + "!");
+            System.out.println("Age: " + customerAge);
+            System.out.println();
+            System.out.println("Do you have a prescription? [Y/N]: ");
+            String prescriptionInput = sc.next();
+            if (prescriptionInput.equals("Y") || prescriptionInput.equals("y")) {
+                hasPrescription = true;
+                System.out.println("Great! We can assist you with your prescription needs.");
+                System.out.println("Could you please provide your eye grade? ");
+                eyeGrade = sc.nextInt();
+            }
 
             //Display Dashboard
             System.out.println("Please select a category to browse:");
@@ -100,7 +113,7 @@ public class Orderingsystem {
                             int eyeglassIndex = Integer.parseInt(eyeglassChoice.substring(1)) - 1;
                             if (eyeglassIndex >= 0 && eyeglassIndex < eyeglasses.length) {
                                 Eyeglass selectedEyeglass = eyeglasses[eyeglassIndex];
-                                items += selectedEyeglass.getName() + "       - Php" + selectedEyeglass.getPrice() + "\n";
+                                items += selectedEyeglass.getName() + "        Php" + selectedEyeglass.getPrice() + "\n";
                                 totalCost += selectedEyeglass.getPrice();
                                 System.out.println("You have selected: " + selectedEyeglass.getName() + " - Php" + selectedEyeglass.getPrice());
                                 addOnAvailable = true;
@@ -135,7 +148,7 @@ public class Orderingsystem {
                             int contactLensIndex = Integer.parseInt(contactLensChoice.substring(1)) - 1;
                             if (contactLensIndex >= 0 && contactLensIndex < contacts.length) {
                                 Contacts selectedContactLens = contacts[contactLensIndex];
-                                items += selectedContactLens.getContactLensName() + "       - Php" + selectedContactLens.getContactLensPrices() + "\n";
+                                items += selectedContactLens.getContactLensName() + "        Php" + selectedContactLens.getContactLensPrices() + "\n";
                                 totalCost += selectedContactLens.getContactLensPrices();
                                 System.out.println("You have selected: " + selectedContactLens.getContactLensName() + " - Php" + selectedContactLens.getContactLensPrices());
                             } else {
@@ -166,7 +179,7 @@ public class Orderingsystem {
                             Accessories[] accessories = Inventory.getAccessories();
                             if (accessoriesIndex >= 0 && accessoriesIndex < accessories.length) {
                                 Accessories selectedAccessory = accessories[accessoriesIndex];
-                                items += selectedAccessory.getName() + " - Php" + selectedAccessory.getPrice() + "\n";
+                                items += selectedAccessory.getName() + "        Php" + selectedAccessory.getPrice() + "\n";
                                 totalCost += selectedAccessory.getPrice();
                                 System.out.println("You have selected: " + selectedAccessory.getName() + "       - Php" + selectedAccessory.getPrice());
                             } else {
@@ -201,7 +214,7 @@ public class Orderingsystem {
                             int addOnIndex = Integer.parseInt(addOnSelection.substring(1)) - 1;
                             if (addOnIndex >= 0 && addOnIndex < AddOns.length) {
                                 AddOn selectedAddOn = AddOns[addOnIndex];
-                                items += selectedAddOn.getAddOnNames() + " -       Php" + selectedAddOn.getAddOnPrices() + "\n";
+                                items += selectedAddOn.getAddOnNames() + "        Php" + selectedAddOn.getAddOnPrices() + "\n";
                                 totalCost += selectedAddOn.getAddOnPrices();
                                 System.out.println("You have selected: " + selectedAddOn.getAddOnNames() + " - Php" + selectedAddOn.getAddOnPrices());
                             } else {
@@ -229,7 +242,15 @@ public class Orderingsystem {
                     exitAppChoice = false;
                     sc.close();
                     clearScreen();
-                    System.out.println("Thank you for using the ESY Optical Ordering System. Goodbye!");
+                }
+            }
+            // Additional cost for every 100 eye grade
+            if (hasPrescription) {
+                int additionalCostUnits = eyeGrade / 100;
+                double additionalCost = additionalCostUnits * 50.0; // Php50 for every 100 eye grade
+                totalCost += additionalCost;
+                if (additionalCostUnits > 0) {
+                    items += "Prescription Surcharge        Php" + String.format("%.2f", additionalCost) + "\n";
                 }
             }
 
@@ -245,6 +266,8 @@ public class Orderingsystem {
                 System.out.printf("Total Amount Due: Php%.2f\n", (totalCost + (totalCost * 0.12)));
                 System.out.println("Thank you for your purchase!");
                 System.out.println("Take care of your eyes! See you soon!");
+            } else if (!exitAppChoice && items.isEmpty()) {
+                System.out.println("No items were purchased. Thank you for visiting EYE SEE YOU OPTICAL!");
             }
         }
     }
