@@ -16,10 +16,14 @@ public class Orderingsystem {
         String items = "";
         double totalCost = 0.0;
 
+        boolean addOnAvailable = false;
+
+
         // Integers for choices
         int dashboardChoice = 0;
         String eyeglassChoice = "";
         String contactLensChoice = "";
+        String accessoriesChoice = "";
 
         // Booleans for loops
         boolean exitAppChoice = true;
@@ -89,15 +93,17 @@ public class Orderingsystem {
                         if (eyeglasses.length % 3 != 0) {
                             System.out.println();
                         }
+
                         eyeglassChoice = sc.next();
 
                         if (eyeglassChoice.startsWith("E") || eyeglassChoice.startsWith("e")) {
                             int eyeglassIndex = Integer.parseInt(eyeglassChoice.substring(1)) - 1;
                             if (eyeglassIndex >= 0 && eyeglassIndex < eyeglasses.length) {
                                 Eyeglass selectedEyeglass = eyeglasses[eyeglassIndex];
-                                items += selectedEyeglass.getName() + " - Php" + selectedEyeglass.getPrice() + "\n";
+                                items += selectedEyeglass.getName() + "       - Php" + selectedEyeglass.getPrice() + "\n";
                                 totalCost += selectedEyeglass.getPrice();
                                 System.out.println("You have selected: " + selectedEyeglass.getName() + " - Php" + selectedEyeglass.getPrice());
+                                addOnAvailable = true;
                             } else {
                                 System.out.println("Invalid eyeglass selection.");
                             }
@@ -118,7 +124,89 @@ public class Orderingsystem {
                         if (contacts.length % 3 != 0) {
                             System.out.println();
                         }
+
+                        contactLensChoice = sc.next();
+
+                        if (contactLensChoice.startsWith("C") || contactLensChoice.startsWith("c")) {
+                            int contactLensIndex = Integer.parseInt(contactLensChoice.substring(1)) - 1;
+                            if (contactLensIndex >= 0 && contactLensIndex < contacts.length) {
+                                Contacts selectedContactLens = contacts[contactLensIndex];
+                                items += selectedContactLens.getContactLensName() + "       - Php" + selectedContactLens.getContactLensPrices() + "\n";
+                                totalCost += selectedContactLens.getContactLensPrices();
+                                System.out.println("You have selected: " + selectedContactLens.getContactLensName() + " - Php" + selectedContactLens.getContactLensPrices());
+                            } else {
+                                System.out.println("Invalid contact lens selection.");
+                            }
+                        } else {
+                            System.out.println("Invalid input format. Please use the format 'C<number>'.");
+                        }
                         break;
+                    case 3:
+                        System.out.println("Available Accessories:");
+                        for (int i = 0, j = 1; i < Inventory.getAccessories().length; i++, j++) {
+                            Accessories accessory = Inventory.getAccessories()[i];
+                            System.out.printf("[A%-2d] %-30s Php%-8.2f", j, accessory.getName(), accessory.getPrice());
+                            System.out.print("   ");
+                            if (j % 3 == 0) {
+                                System.out.println();
+                            }
+                        }
+                        if (Inventory.getAccessories().length % 3 != 0) {
+                            System.out.println();
+                        }
+
+                        accessoriesChoice = sc.next();
+
+                        if (accessoriesChoice.startsWith("A") || accessoriesChoice.startsWith("a")) {
+                            int accessoriesIndex = Integer.parseInt(accessoriesChoice.substring(1)) - 1;
+                            Accessories[] accessories = Inventory.getAccessories();
+                            if (accessoriesIndex >= 0 && accessoriesIndex < accessories.length) {
+                                Accessories selectedAccessory = accessories[accessoriesIndex];
+                                items += selectedAccessory.getName() + " - Php" + selectedAccessory.getPrice() + "\n";
+                                totalCost += selectedAccessory.getPrice();
+                                System.out.println("You have selected: " + selectedAccessory.getName() + "       - Php" + selectedAccessory.getPrice());
+                            } else {
+                                System.out.println("Invalid accessory selection.");
+                            }
+                        } else {
+                            System.out.println("Invalid input format. Please use the format 'A<number>'.");
+                        }
+                        break;
+                }
+
+                if (addOnAvailable && dashboardChoice == 1) {
+                    // Process add-on choices
+                    System.out.println("Would you like to add any add-ons? [Y/N]: ");
+                    String addOnChoice = sc.next();
+                    if (addOnChoice.equalsIgnoreCase("Y")) {
+                        System.out.println("Available Add-Ons:");
+                        for (int i = 0, j = 1; i < AddOns.length; i++, j++) {
+                            System.out.printf("[D%-2d] %-30s Php%-8.2f", j, AddOns[i].getAddOnNames(), AddOns[i].getAddOnPrices());
+                            System.out.print("   ");
+                            if (j % 3 == 0) {
+                                System.out.println();
+                            }
+                        }
+                        if (AddOns.length % 3 != 0) {
+                            System.out.println();
+                        }
+
+                        String addOnSelection = sc.next();
+
+                        if (addOnSelection.startsWith("D") || addOnSelection.startsWith("d")) {
+                            int addOnIndex = Integer.parseInt(addOnSelection.substring(1)) - 1;
+                            if (addOnIndex >= 0 && addOnIndex < AddOns.length) {
+                                AddOn selectedAddOn = AddOns[addOnIndex];
+                                items += selectedAddOn.getAddOnNames() + " -       Php" + selectedAddOn.getAddOnPrices() + "\n";
+                                totalCost += selectedAddOn.getAddOnPrices();
+                                System.out.println("You have selected: " + selectedAddOn.getAddOnNames() + " - Php" + selectedAddOn.getAddOnPrices());
+                            } else {
+                                System.out.println("Invalid add-on selection.");
+                            }
+                        } else {
+                            System.out.println("Invalid input format. Please use the format 'D<number>'.");
+                        }
+                    }
                 }
 
                 // Exit eyeglass choice loop
@@ -139,6 +227,20 @@ public class Orderingsystem {
                     clearScreen();
                     System.out.println("Thank you for using the ESY Optical Ordering System. Goodbye!");
                 }
+            }
+
+            // Display order summary
+            if (!exitAppChoice && !items.isEmpty()) {
+                System.out.println("EYE SEE YOU OPTICAL");
+                System.out.printf("Customer Name(%s): %s\n", customerName, customerAge);
+                System.out.println("Order Summary:");
+                System.out.println("Product Name          |       Price");
+                System.out.println(items);
+                System.out.printf("Subtotal: Php%.2f\n", totalCost);
+                System.out.println("VAT(12%): Php" + String.format("%.2f", (totalCost * 0.12)));
+                System.out.printf("Total Amount Due: Php%.2f\n", (totalCost + (totalCost * 0.12)));
+                System.out.println("Thank you for your purchase!");
+                System.out.println("Take care of your eyes! See you soon!");
             }
         }
     }
