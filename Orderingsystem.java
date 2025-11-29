@@ -63,7 +63,7 @@ public class Orderingsystem {
             clearScreen();
 
             // Display welcome message
-            System.out.println("\n\t\t\t\t\tWelcome to the ESY Optical Ordering System!\t\t\t\t\t");
+            System.out.println("\n\t\t\t\t\t\t\tWelcome to the ESY Optical Ordering System!");
 
             // Get customer details if empty
             if (customerName.isEmpty()) {
@@ -81,24 +81,24 @@ public class Orderingsystem {
                 String prescriptionInput = sc.next();
                 if (prescriptionInput.equals("Y") || prescriptionInput.equals("y")) {
                     hasPrescription = true;
-                    System.out.println("Great! We can assist you with your prescription needs.");
+                    System.out.println("\n\t\t\t\t\t\t  Great! We can assist you with your prescription needs.");
                     System.out.print("\n\nCould you please provide your eye grade? ");
                     eyeGrade = sc.nextInt();
                 } else if (prescriptionInput.equals("N") || prescriptionInput.equals("n")) {
                     hasPrescription = false;
-                    System.out.println("Do you like to get your eyes checked for 1000php? [Y/N]: ");
+                    System.out.print("\nDo you like to get your eyes checked for 1000php? [Y/N]: ");
                     String eyeCheckInput = sc.next();
                     if (eyeCheckInput.equals("Y") || eyeCheckInput.equals("y")) {
                         hasPrescription = true;
                         itemName += "Eye Checkup Service,";
                         itemPrice += "1000.00,";
                         totalCost += 1000.00;
-                        System.out.println("Thank you! An eye check will be included in your order.");
-                        System.out.println("Could you please provide your eye grade? ");
+                        System.out.println("\n\n\t\t\t\t\t\t   Thank you! An eye check will be included in your order.");
+                        System.out.print("\n\nCould you please provide your eye grade? ");
                         eyeGrade = sc.nextInt();
                     } else if (eyeCheckInput.equals("N") || eyeCheckInput.equals("n")) {
                         hasPrescription = false;
-                        System.out.println("No worries! You can still browse our selection.");
+                        System.out.println("\nNo worries! You can still browse our selection.");
                     }
                 } else {
                     System.out.println("Invalid input. Please enter 'Y' for Yes or 'N' for No.");
@@ -109,8 +109,8 @@ public class Orderingsystem {
             clearScreen();
 
             // Display customer details
-            System.out.println("\n\n\t\t\t\t\t\t\tHello, " + customerName + "!");
-            System.out.println("\t\t\t\t\t\t\t " + customerAge + "yrs old");
+            System.out.println("\n\n\t\t\t\t\t\t\t\t\tHello, " + customerName + "!");
+            System.out.println("\t\t\t\t\t\t\t\t\t " + customerAge + "yrs old");
             System.out.println();
             
             
@@ -127,7 +127,7 @@ public class Orderingsystem {
                 // Process eyeglass choices
                 switch (dashboardChoice) {
                     case 1:
-                        System.out.println("Available Eyeglasses:");
+                        System.out.println("\n\nAvailable Eyeglasses:\n");
                         for (int i = 0, j = 1; i < eyeglasses.length; i++, j++) {
                             System.out.printf("[E%-2d] %-30s Php%-8.2f", j, eyeglasses[i].getName(), eyeglasses[i].getPrice());
                             System.out.print("   ");
@@ -148,22 +148,22 @@ public class Orderingsystem {
                                 itemName += selectedEyeglass.getName() + ",";
                                 itemPrice += String.valueOf(selectedEyeglass.getPrice()) + ",";
                                 totalCost += selectedEyeglass.getPrice();
-                                System.out.println("You have selected: " + selectedEyeglass.getName() + " - Php" + selectedEyeglass.getPrice());
+                                System.out.println("\n\n\t\t\t\t\t\t\tYou have selected: " + selectedEyeglass.getName() + " - Php" + selectedEyeglass.getPrice());
                                 addOnAvailable = true;
                             } else {
-                                System.out.println("Invalid eyeglass selection.");
+                                System.out.println("\nInvalid eyeglass selection.");
                             }
                         } else {
-                            System.out.println("Invalid input format. Please use the format 'E<number>'.");
+                            System.out.println("\nInvalid input format. Please use the format 'E<number>'.");
                         }
 
                         break;
                     case 2:
                         if (customerAge < 18) {
-                            System.out.println("Note: Contact lenses are not recommended for individuals under 18 years old.");
+                            System.out.println("\n\n\t\t\t\t\t  Note: Contact lenses are not recommended for individuals under 18 years old.");
                             break;
                         }
-                        System.out.println("Available Contact Lenses:");
+                        System.out.println("\n\nAvailable Contact Lenses:\n");
                         for (int i = 0, j = 1; i < contacts.length; i++, j++) {
                             System.out.printf("[C%-2d] %-30s Php%-8.2f", j, contacts[i].getContactLensName(), contacts[i].getContactLensPrices());
                             System.out.print("   ");
@@ -184,16 +184,16 @@ public class Orderingsystem {
                                 itemName += selectedContactLens.getContactLensName() + ",";
                                 itemPrice += String.valueOf(selectedContactLens.getContactLensPrices()) + ",";
                                 totalCost += selectedContactLens.getContactLensPrices();
-                                System.out.println("You have selected: " + selectedContactLens.getContactLensName() + " - Php" + selectedContactLens.getContactLensPrices());
+                                System.out.println("\n\n\t\t\t\t\t\t\tYou have selected: " + selectedContactLens.getContactLensName() + " - Php" + selectedContactLens.getContactLensPrices());
                             } else {
-                                System.out.println("Invalid contact lens selection.");
+                                System.out.println("\nInvalid contact lens selection.");
                             }
                         } else {
-                            System.out.println("Invalid input format. Please use the format 'C<number>'.");
+                            System.out.println("\nInvalid input format. Please use the format 'C<number>'.");
                         }
                         break;
                     case 3:
-                        System.out.println("Available Accessories:");
+                        System.out.println("\n\nAvailable Accessories:\n");
                         for (int i = 0, j = 1; i < Inventory.getAccessories().length; i++, j++) {
                             Accessories accessory = Inventory.getAccessories()[i];
                             System.out.printf("[A%-2d] %-30s Php%-8.2f", j, accessory.getName(), accessory.getPrice());
@@ -216,23 +216,23 @@ public class Orderingsystem {
                                 itemName += selectedAccessory.getName() + ",";
                                 itemPrice += String.valueOf(selectedAccessory.getPrice()) + ",";
                                 totalCost += selectedAccessory.getPrice();
-                                System.out.println("You have selected: " + selectedAccessory.getName() + "       - Php" + selectedAccessory.getPrice());
+                                System.out.println("\n\n\t\t\t\t\t\t\tYou have selected: " + selectedAccessory.getName() + "   - Php" + selectedAccessory.getPrice());
                             } else {
-                                System.out.println("Invalid accessory selection.");
+                                System.out.println("\nInvalid accessory selection.");
                             }
                         } else {
-                            System.out.println("Invalid input format. Please use the format 'A<number>'.");
+                            System.out.println("\nInvalid input format. Please use the format 'A<number>'.");
                         }
                         break;
                 }
 
                 if (addOnAvailable && dashboardChoice == 1) {
                     // Process add-on choices
-                    System.out.println("Would you like to add any add-ons? [Y/N]: ");
+                    System.out.print("\n\nWould you like to add any add-ons? [Y/N]: ");
                     String addOnChoice = sc.next();
                     if (addOnChoice.equalsIgnoreCase("Y")) {
                         clearScreen();
-                        System.out.println("Available Add-Ons:");
+                        System.out.println("\n\nAvailable Add-Ons:\n");
                         for (int i = 0, j = 1; i < AddOns.length; i++, j++) {
                             System.out.printf("[D%-2d] %-30s Php%-8.2f", j, AddOns[i].getAddOnNames(), AddOns[i].getAddOnPrices());
                             System.out.print("   ");
@@ -253,12 +253,12 @@ public class Orderingsystem {
                                 itemName += selectedAddOn.getAddOnNames() + ",";
                                 itemPrice += String.valueOf(selectedAddOn.getAddOnPrices()) + ",";
                                 totalCost += selectedAddOn.getAddOnPrices();
-                                System.out.println("You have selected: " + selectedAddOn.getAddOnNames() + " - Php" + selectedAddOn.getAddOnPrices());
+                                System.out.println("\n\n$90s\n\n   You have selected: " + selectedAddOn.getAddOnNames() + " - Php" + selectedAddOn.getAddOnPrices());
                             } else {
-                                System.out.println("Invalid add-on selection.");
+                                System.out.println("\nInvalid add-on selection.");
                             }
                         } else {
-                            System.out.println("Invalid input format. Please use the format 'D<number>'.");
+                            System.out.println("\nInvalid input format. Please use the format 'D<number>'.");
                         }
                     }
                 }
@@ -267,7 +267,7 @@ public class Orderingsystem {
                 clearScreen();
 
                 // Exit the application
-                System.out.println("Do you want to continue shopping? [Y/N]: ");
+                System.out.print("\n\nDo you want to continue shopping? [Y/N]: ");
                 String exitChoice = sc.next();
                 if (exitChoice.equalsIgnoreCase("N")) {
                     exitAppChoice = false;
@@ -293,23 +293,23 @@ public class Orderingsystem {
 
             // Display order summary
             if (!exitAppChoice && !itemName.isEmpty()) {
-                System.out.printf("%40s\n\n", "EYE SEE YOU OPTICAL");
+                System.out.printf("\n\n%90s\n\n", "EYE SEE YOU OPTICAL");
                 System.out.printf("Customer Name(%s): %s\n\n", customerName, customerAge);
-                System.out.printf("%37s\n\n" ,"Order Summary:");
-                System.out.printf("%-30s | %15s%n", "Product Name", "Price");
-                System.out.println("-----------------------------------------------------");
+                System.out.printf("\n%88s\n\n" ,"Order Summary:\n");
+                System.out.printf("%-50s | %40s%n", "\t\t\t\tProduct Name", "Price");
+                System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
                 for (int i = 0; i < itemNamesArray.length; i++) {
-                    System.out.printf("%-30s | %15sPhp\n", itemNamesArray[i], itemPricesArray[i]);
+                    System.out.printf("%-64s | %40sPhp\n", "\t\t" + itemNamesArray[i], itemPricesArray[i]);
                 }
-                System.out.println("-----------------------------------------------------\n\n");
-                System.out.printf("Subtotal: Php%.2f\n", totalCost);
-                System.out.println("VAT(12%): Php" + String.format("%.2f", (totalCost * 0.12)));
-                System.out.printf("Total Amount Due: Php%.2f\n\n", (totalCost + (totalCost * 0.12)));
-                System.out.println("-----------------------------------------------------\n");
-                System.out.printf("%40s\n","Thank you for your purchase!");
-                System.out.printf("%5s" ,"Take care of your eyes! See you soon!");
+                System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                System.out.printf("\t\tSubtotal: Php%.2f\n", totalCost);
+                System.out.println("\t\tVAT(12%): Php" + String.format("%.2f", (totalCost * 0.12)));
+                System.out.printf("\t\tTotal Amount Due: Php%.2f\n\n", (totalCost + (totalCost * 0.12)));
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                System.out.printf("%96s\n","Thank you for your purchase!");
+                System.out.printf("%100s" ,"Take care of your eyes! See you soon!");
             } else if (!exitAppChoice && itemName.isEmpty()) {
-                System.out.println("No items were purchased. Thank you for visiting EYE SEE YOU OPTICAL!");
+                System.out.println("\n\t\t\t\t\t\tNo items were purchased. Thank you for visiting EYE SEE YOU OPTICAL!");
             }
         }
     }
