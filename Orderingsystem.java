@@ -109,8 +109,13 @@ public class Orderingsystem {
             clearScreen();
 
             // Display customer details
-            System.out.println("Hello, " + customerName + "!");
+            System.out.println("Customer Name: " + customerName + "!");
             System.out.println("Age: " + customerAge);
+            if (hasPrescription) {
+                System.out.println("Eye Grade: " + eyeGrade);
+            } else {
+                System.out.println("No Prescription");
+            }
             System.out.println();
             
             
