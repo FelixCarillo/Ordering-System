@@ -229,6 +229,10 @@ public class Orderingsystem {
                             System.out.println("\nInvalid input format. Please use the format 'A<number>'.");
                         }
                         break;
+
+                    default:
+                        System.out.println("Thank you for visiting EYE SEE YOU OPTICAL!");
+                        break;
                 }
 
                 if (addOnAvailable && dashboardChoice == 1) {
@@ -290,6 +294,15 @@ public class Orderingsystem {
                     itemPrice += String.valueOf(additionalCost) + ",";
                     totalCost += additionalCost;
                 }
+            }
+
+            // Confirm purchase
+            System.out.println("Are you sure with this purchase? [Y/N]: ");
+            String confirmPurchase = sc.next();
+            if (confirmPurchase.equalsIgnoreCase("N")){
+                itemName = "";
+                itemPrice = "";
+                System.out.println("\nYour cart has been cleared. Thank you for visiting EYE SEE YOU OPTICAL!");
             }
 
             // Split the item names and prices into arrays
