@@ -19,7 +19,7 @@ public class Orderingsystem {
 
         boolean addOnAvailable = false;
 
-        boolean confirmPurchaseFinal = true;
+        boolean confirmPurchaseFinal = false;
 
         boolean eyeCheckService = false;
 
@@ -328,7 +328,8 @@ public class Orderingsystem {
                             System.out.println("\nYour cart has been cleared.");
                         }
                         confirmPurchaseFinal = false;
-                    }
+                    } else {
+                        confirmPurchaseFinal = true;
                 }
             }
 
