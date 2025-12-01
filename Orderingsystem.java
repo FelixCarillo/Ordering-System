@@ -19,6 +19,9 @@ public class Orderingsystem {
 
         boolean addOnAvailable = false;
 
+        boolean confirmPurchaseFinal = true;
+
+        boolean eyeCheckService = false;
 
         // Integers for choices
         int dashboardChoice = 0;
@@ -29,7 +32,6 @@ public class Orderingsystem {
         // Booleans for loops
         boolean exitAppChoice = true;
         boolean exitDashboardChoice;
-
 
         // Customer details
         String customerName = "";
@@ -90,6 +92,7 @@ public class Orderingsystem {
                     String eyeCheckInput = sc.next();
                     if (eyeCheckInput.equals("Y") || eyeCheckInput.equals("y")) {
                         hasPrescription = true;
+                        eyeCheckService = true;
                         itemName += "Eye Checkup Service,";
                         itemPrice += "1000.00,";
                         totalCost += 1000.00;
@@ -105,6 +108,17 @@ public class Orderingsystem {
                 }
             }
 
+            // Additional cost for every 100 eye grade
+            if (hasPrescription) {
+                int additionalCostUnits = eyeGrade / 100;
+                double additionalCost = additionalCostUnits * 50.0; // Php50 for every 100 eye grade
+                totalCost += additionalCost;
+                if (additionalCostUnits > 0) {
+                    itemName += "Additional Eye Grade Charge,";
+                    itemPrice += String.valueOf(additionalCost) + ",";
+                    totalCost += additionalCost;
+                }
+            }
 
             clearScreen();
 
@@ -117,8 +131,6 @@ public class Orderingsystem {
                 System.out.println("No Prescription");
             }
             System.out.println();
-            
-            
 
             //Display Dashboard
             System.out.println("\nPlease select a category to browse:");
@@ -282,40 +294,42 @@ public class Orderingsystem {
                 String exitChoice = sc.next();
                 if (exitChoice.equalsIgnoreCase("N")) {
                     exitAppChoice = false;
-                    sc.close();
                     clearScreen();
-                }
-            }
-            // Additional cost for every 100 eye grade
-            if (hasPrescription) {
-                int additionalCostUnits = eyeGrade / 100;
-                double additionalCost = additionalCostUnits * 50.0; // Php50 for every 100 eye grade
-                totalCost += additionalCost;
-                if (additionalCostUnits > 0) {
-                    itemName += "Additional Eye Grade Charge,";
-                    itemPrice += String.valueOf(additionalCost) + ",";
-                    totalCost += additionalCost;
+
+                    // Confirm purchase
+                    System.out.println("Are you sure with this purchase? [Y/N]: ");
+                    String confirmPurchase = sc.next();
+                    if (confirmPurchase.equalsIgnoreCase("N")) {
+                        itemName = "";
+                        itemPrice = "";
+                        if (eyeCheckService){
+                            itemName += "Eye Checkup Service,";
+                            itemPrice += "1000.00,";
+                            totalCost = 1000.00;
+
+                            System.out.println("\nYour cart has been cleared except for the Eye Checkup Service.");
+                        } else {
+                            totalCost = 0.0;
+                            System.out.println("\nYour cart has been cleared.");
+                        }
+                        confirmPurchaseFinal = false;
+                        
+
+                        sc.close();
+                    }
                 }
             }
 
-            // Confirm purchase
-            System.out.println("Are you sure with this purchase? [Y/N]: ");
-            String confirmPurchase = sc.next();
-            if (confirmPurchase.equalsIgnoreCase("N")){
-                itemName = "";
-                itemPrice = "";
-                System.out.println("\nYour cart has been cleared. Thank you for visiting EYE SEE YOU OPTICAL!");
-            }
 
             // Split the item names and prices into arrays
             String[] itemNamesArray = itemName.split(",");
             String[] itemPricesArray = itemPrice.split(",");
 
             // Display order summary
-            if (!exitAppChoice && !itemName.isEmpty()) {
+            if (confirmPurchaseFinal || eyeCheckService) {
                 System.out.printf("\n\n%90s\n\n", "EYE SEE YOU OPTICAL");
                 System.out.printf("Customer Name(%s): %s\n\n", customerName, customerAge);
-                System.out.printf("\n%88s\n\n" ,"Order Summary:\n");
+                System.out.printf("\n%88s\n\n", "Order Summary:\n");
                 System.out.printf("%-50s | %40s%n", "\t\t\t\tProduct Name", "Price");
                 System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
                 for (int i = 0; i < itemNamesArray.length; i++) {
@@ -326,10 +340,10 @@ public class Orderingsystem {
                 System.out.println("\t\tVAT(12%): Php" + String.format("%.2f", (totalCost * 0.12)));
                 System.out.printf("\t\tTotal Amount Due: Php%.2f\n\n", (totalCost + (totalCost * 0.12)));
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-                System.out.printf("%96s\n","Thank you for your purchase!");
-                System.out.printf("%100s" ,"Take care of your eyes! See you soon!");
+                System.out.printf("%96s\n", "Thank you for your purchase!");
+                System.out.printf("%100s", "Take care of your eyes! See you soon!");
             } else if (!exitAppChoice && itemName.isEmpty()) {
-                System.out.println("\n\t\t\t\t\t\tNo items were purchased. Thank you for visiting EYE SEE YOU OPTICAL!");
+                System.out.println("\n\t\t\t\t\t\tNo items were purchased. Thank you for visiting EYE SEE YOU OPTICAL!\n");
             }
         }
     }
