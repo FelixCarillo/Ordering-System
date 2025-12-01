@@ -166,6 +166,8 @@ public class Orderingsystem {
                     case 2:
                         if (customerAge < 18) {
                             System.out.println("\n\n\t\t\t\t\t  Note: Contact lenses are not recommended for individuals under 18 years old.");
+                            System.out.println("Press any key to continue...");
+                            sc.next();
                             break;
                         }
                         System.out.println("\n\nAvailable Contact Lenses:\n");
