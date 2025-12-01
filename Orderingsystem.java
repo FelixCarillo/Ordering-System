@@ -302,7 +302,7 @@ public class Orderingsystem {
                     if (confirmPurchase.equalsIgnoreCase("N")) {
                         itemName = "";
                         itemPrice = "";
-                        if (eyeCheckService){
+                        if (eyeCheckService) {
                             itemName += "Eye Checkup Service,";
                             itemPrice += "1000.00,";
                             totalCost = 1000.00;
@@ -313,13 +313,9 @@ public class Orderingsystem {
                             System.out.println("\nYour cart has been cleared.");
                         }
                         confirmPurchaseFinal = false;
-                        
-
-                        sc.close();
                     }
                 }
             }
-
 
             // Split the item names and prices into arrays
             String[] itemNamesArray = itemName.split(",");
@@ -342,6 +338,34 @@ public class Orderingsystem {
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
                 System.out.printf("%96s\n", "Thank you for your purchase!");
                 System.out.printf("%100s", "Take care of your eyes! See you soon!");
+
+                // Handle Payment
+                clearScreen();
+
+                System.out.printf("\n\n%90s\n\n", "EYE SEE YOU OPTICAL");
+                System.out.printf("Customer Name(%s): %s\n\n", customerName, customerAge);
+                System.out.printf("\n%88s\n\n", "Payment Portal:\n");
+
+                double amountDue = totalCost + (totalCost * 0.12);
+                double paymentAmount = 0.0;
+
+                while (paymentAmount < amountDue) {
+                    System.out.printf("Total Amount Due: Php%.2f\n", amountDue);
+                    System.out.print("Enter payment amount: Php");
+                    paymentAmount = sc.nextDouble();
+
+                    if (paymentAmount < amountDue) {
+                        System.out.println("\nInsufficient payment. Please enter an amount equal to or greater than the total amount due.\n");
+                    }
+                }
+
+                // handle change
+                if (paymentAmount >= amountDue) {
+                    double change = paymentAmount - amountDue;
+                    System.out.printf("\nPayment accepted. Your change is: Php%.2f\n", change);
+                    System.out.println("\n\n\t\t\t\t\t\t   Thank you for shopping at EYE SEE YOU OPTICAL!\n");
+                }
+
             } else if (!exitAppChoice && itemName.isEmpty()) {
                 System.out.println("\n\t\t\t\t\t\tNo items were purchased. Thank you for visiting EYE SEE YOU OPTICAL!\n");
             }
