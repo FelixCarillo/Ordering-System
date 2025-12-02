@@ -148,6 +148,8 @@ public class Orderingsystem {
             System.out.println("\nPlease select a category to browse:");
             System.out.println("[1] Eyeglasses [2] Contact Lenses [3] Accessories");
             System.out.print("Enter your choice[1-3]: ");
+            
+
             exitDashboardChoice = true;
             dashboardChoice = sc.nextInt();
 
@@ -339,7 +341,7 @@ public class Orderingsystem {
             }
             
             // Display order summary
-            if (confirmPurchaseFinal || eyeCheckService) {
+            if (confirmPurchaseFinal || (eyeCheckService && confirmPurchaseFinal)) {
                 System.out.printf("\n\n%90s\n\n", "EYE SEE YOU OPTICAL");
                 System.out.printf("Customer Name(%s): %s\n\n", customerName, customerAge);
                 System.out.printf("\n%88s\n\n", "Order Summary:\n");
@@ -386,7 +388,7 @@ public class Orderingsystem {
                     System.out.println("\n\n\t\t\t\t\t\t   Thank you for shopping at EYE SEE YOU OPTICAL!\n");
                 }
 
-            } else if (!exitAppChoice && itemName.isEmpty()) {
+            } if (!exitAppChoice && itemName.isEmpty()) {
                 System.out.println("\n\t\t\t\t\t\tNo items were purchased. Thank you for visiting EYE SEE YOU OPTICAL!\n");
             }
         }
