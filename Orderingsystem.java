@@ -129,7 +129,6 @@ public class Orderingsystem {
                 if (additionalCostUnits > 0) {
                     itemName += "Additional Eye Grade Charge,";
                     itemPrice += String.valueOf(additionalCost) + ",";
-                    totalCost += additionalCost;
                 }
             }
 
