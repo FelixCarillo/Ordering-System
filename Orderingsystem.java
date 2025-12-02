@@ -42,10 +42,10 @@ public class Orderingsystem {
         int customerAge = 0;
         int eyeGrade = 20;
         boolean hasPrescription = false;
-        
+
         //Discount details
         int seniorAge = 60;
-        double seniorDiscountRate = 0.10; 
+        double seniorDiscountRate = 0.10;
         boolean isSeniorCitizen = false;
 
         // Initialize eyeglasses
@@ -123,17 +123,6 @@ public class Orderingsystem {
                 }
             }
 
-            // Additional cost for every 100 eye grade
-            if (hasPrescription) {
-                int additionalCostUnits = eyeGrade / 100;
-                double additionalCost = additionalCostUnits * 50.0; // Php50 for every 100 eye grade
-                totalCost += additionalCost;
-                if (additionalCostUnits > 0) {
-                    itemName += "Additional Eye Grade Charge,";
-                    itemPrice += String.valueOf(additionalCost) + ",";
-                }
-            }
-
             clearScreen();
 
             // Display customer details
@@ -150,7 +139,6 @@ public class Orderingsystem {
             System.out.println("\nPlease select a category to browse:");
             System.out.println("[1] Eyeglasses [2] Contact Lenses [3] Accessories");
             System.out.print("Enter your choice[1-3]: ");
-            
 
             exitDashboardChoice = true;
             dashboardChoice = sc.nextInt();
@@ -171,7 +159,7 @@ public class Orderingsystem {
                         if (eyeglasses.length % 3 != 0) {
                             System.out.println();
                         }
-                        
+
                         System.out.print("Enter product ID: ");
                         eyeglassChoice = sc.next();
 
@@ -184,6 +172,17 @@ public class Orderingsystem {
                                 totalCost += selectedEyeglass.getPrice();
                                 System.out.println("\n\n\t\t\t\t\t\t\tYou have selected: " + selectedEyeglass.getName() + " - Php" + selectedEyeglass.getPrice());
                                 addOnAvailable = true;
+
+                                // Additional cost for every 100 eye grade
+                                if (hasPrescription) {
+                                    int additionalCostUnits = eyeGrade / 100;
+                                    double additionalCost = additionalCostUnits * 50.0; // Php50 for every 100 eye grade
+                                    totalCost += additionalCost;
+                                    if (additionalCostUnits > 0) {
+                                        itemName += "Additional Eye Grade Charge,";
+                                        itemPrice += String.valueOf(additionalCost) + ",";
+                                    }
+                                }
                             } else {
                                 System.out.println("\nInvalid eyeglass selection.");
                             }
@@ -210,7 +209,7 @@ public class Orderingsystem {
                         if (contacts.length % 3 != 0) {
                             System.out.println();
                         }
-                        
+
                         System.out.print("Enter product ID: ");
                         contactLensChoice = sc.next();
 
@@ -222,6 +221,17 @@ public class Orderingsystem {
                                 itemPrice += String.valueOf(selectedContactLens.getContactLensPrices()) + ",";
                                 totalCost += selectedContactLens.getContactLensPrices();
                                 System.out.println("\n\n\t\t\t\t\t\t\tYou have selected: " + selectedContactLens.getContactLensName() + " - Php" + selectedContactLens.getContactLensPrices());
+
+                                // Additional cost for every 100 eye grade
+                                if (hasPrescription) {
+                                    int additionalCostUnits = eyeGrade / 100;
+                                    double additionalCost = additionalCostUnits * 50.0; // Php50 for every 100 eye grade
+                                    totalCost += additionalCost;
+                                    if (additionalCostUnits > 0) {
+                                        itemName += "Additional Eye Grade Charge,";
+                                        itemPrice += String.valueOf(additionalCost) + ",";
+                                    }
+                                }
                             } else {
                                 System.out.println("\nInvalid contact lens selection.");
                             }
@@ -335,75 +345,73 @@ public class Orderingsystem {
                         confirmPurchaseFinal = false;
                     } else {
                         confirmPurchaseFinal = true;
-                }
-            }
-
-            // Split the item names and prices into arrays
-            String[] itemNamesArray = itemName.split(",");
-            String[] itemPricesArray = itemPrice.split(",");
-
-            if (isSeniorCitizen) {
-                discountAmount = totalCost * seniorDiscountRate;
-                totalCost = totalCost - discountAmount;
-            }
-            
-            // Display order summary
-            if (confirmPurchaseFinal || (eyeCheckService && confirmPurchaseFinal)) {
-
-                // Handle Payment
-                clearScreen();
-
-                System.out.printf("\n\n%90s\n\n", "EYE SEE YOU OPTICAL");
-                System.out.printf("Customer Name(%s): %s\n\n", customerName, customerAge);
-                System.out.printf("\n%88s\n\n", "Payment Portal:\n");
-
-                double amountDue = totalCost + (totalCost * 0.12);
-                double paymentAmount = 0.0;
-
-                while (paymentAmount < amountDue) {
-                    System.out.printf("Total Amount Due: Php%.2f\n", amountDue);
-                    System.out.print("Enter payment amount: Php");
-                    paymentAmount = sc.nextDouble();
-
-                    if (paymentAmount < amountDue) {
-                        System.out.println("\nInsufficient payment. Please enter an amount equal to or greater than the total amount due.\n");
                     }
                 }
 
-                // handle change
-                if (paymentAmount >= amountDue) {
-                    change = paymentAmount - amountDue;
-                    System.out.printf("\nPayment accepted. Your change is: Php%.2f\n", change);
-                }
+                // Split the item names and prices into arrays
+                String[] itemNamesArray = itemName.split(",");
+                String[] itemPricesArray = itemPrice.split(",");
 
-
-                System.out.printf("\n\n%90s\n\n", "EYE SEE YOU OPTICAL");
-                System.out.printf("Customer Name(%s): %s\n\n", customerName, customerAge);
-                System.out.printf("\n%88s\n\n", "Order Summary:\n");
-                System.out.printf("%-50s | %40s%n", "\t\t\t\tProduct Name", "Price");
-                System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-                for (int i = 0; i < itemNamesArray.length; i++) {
-                    System.out.printf("%-64s | %40sPhp\n", "\t\t" + itemNamesArray[i], itemPricesArray[i]);
-                }
                 if (isSeniorCitizen) {
-                    System.out.printf("\t\tSenior Citizen Discount (10%%):                                 |                                    -Php%.2f\n", discountAmount);
+                    discountAmount = totalCost * seniorDiscountRate;
+                    totalCost = totalCost - discountAmount;
                 }
-                System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-                System.out.printf("\t\tSubtotal: Php%.2f\n", totalCost);
-                System.out.println("\t\tVAT(12%): Php" + String.format("%.2f", (totalCost * 0.12)));
-                System.out.printf("\t\tTotal Amount Due: Php%.2f\n\n", (totalCost + (totalCost * 0.12)));
-                System.out.println("\t\t Customer Payment: Php" + String.format("%.2f", paymentAmount));
-                System.out.printf("\t\t         Change: Php%.2f\n", change);
-                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-                System.out.printf("%96s\n", "Thank you for your purchase!");
-                System.out.printf("%100s", "Take care of your eyes! See you soon!");
 
-                
+                // Display order summary
+                if (confirmPurchaseFinal || (eyeCheckService && confirmPurchaseFinal)) {
 
-            } if (!exitAppChoice && itemName.isEmpty()) {
-                System.out.println("\n\t\t\t\t\t\tNo items were purchased. Thank you for visiting EYE SEE YOU OPTICAL!\n");
+                    // Handle Payment
+                    clearScreen();
+
+                    System.out.printf("\n\n%90s\n\n", "EYE SEE YOU OPTICAL");
+                    System.out.printf("Customer Name(%s): %s\n\n", customerName, customerAge);
+                    System.out.printf("\n%88s\n\n", "Payment Portal:\n");
+
+                    double amountDue = totalCost + (totalCost * 0.12);
+                    double paymentAmount = 0.0;
+
+                    while (paymentAmount < amountDue) {
+                        System.out.printf("Total Amount Due: Php%.2f\n", amountDue);
+                        System.out.print("Enter payment amount: Php");
+                        paymentAmount = sc.nextDouble();
+
+                        if (paymentAmount < amountDue) {
+                            System.out.println("\nInsufficient payment. Please enter an amount equal to or greater than the total amount due.\n");
+                        }
+                    }
+
+                    // handle change
+                    if (paymentAmount >= amountDue) {
+                        change = paymentAmount - amountDue;
+                        System.out.printf("\nPayment accepted. Your change is: Php%.2f\n", change);
+                    }
+
+                    System.out.printf("\n\n%90s\n\n", "EYE SEE YOU OPTICAL");
+                    System.out.printf("Customer Name(%s): %s\n\n", customerName, customerAge);
+                    System.out.printf("\n%88s\n\n", "Order Summary:\n");
+                    System.out.printf("%-50s | %40s%n", "\t\t\t\tProduct Name", "Price");
+                    System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                    for (int i = 0; i < itemNamesArray.length; i++) {
+                        System.out.printf("%-64s | %40sPhp\n", "\t\t" + itemNamesArray[i], itemPricesArray[i]);
+                    }
+                    if (isSeniorCitizen) {
+                        System.out.printf("\t\tSenior Citizen Discount (10%%):                                 |                                    -Php%.2f\n", discountAmount);
+                    }
+                    System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                    System.out.printf("\t\tSubtotal: Php%.2f\n", totalCost);
+                    System.out.println("\t\tVAT(12%): Php" + String.format("%.2f", (totalCost * 0.12)));
+                    System.out.printf("\t\tTotal Amount Due: Php%.2f\n\n", (totalCost + (totalCost * 0.12)));
+                    System.out.println("\t\t Customer Payment: Php" + String.format("%.2f", paymentAmount));
+                    System.out.printf("\t\t         Change: Php%.2f\n", change);
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                    System.out.printf("%96s\n", "Thank you for your purchase!");
+                    System.out.printf("%100s", "Take care of your eyes! See you soon!");
+
+                }
+                if (!exitAppChoice && itemName.isEmpty()) {
+                    System.out.println("\n\t\t\t\t\t\tNo items were purchased. Thank you for visiting EYE SEE YOU OPTICAL!\n");
+                }
             }
-        }
         }
     }
 }
