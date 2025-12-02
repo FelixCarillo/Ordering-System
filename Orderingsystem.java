@@ -23,6 +23,8 @@ public class Orderingsystem {
 
         boolean eyeCheckService = false;
 
+        double discountAmount = 0.0;
+
         // Integers for choices
         int dashboardChoice = 0;
         String eyeglassChoice = "";
@@ -38,6 +40,11 @@ public class Orderingsystem {
         int customerAge = 0;
         int eyeGrade = 20;
         boolean hasPrescription = false;
+        
+        //Discount details
+        int seniorAge = 60;
+        double seniorDiscountRate = 0.10; 
+        boolean isSeniorCitizen = false;
 
         // Initialize eyeglasses
         Eyeglass[] eyeglasses = Inventory.getEyeglasses();
@@ -75,6 +82,12 @@ public class Orderingsystem {
             if (customerAge == 0) {
                 System.out.print("Please enter your age:    ");
                 customerAge = sc.nextInt();
+
+                if (customerAge >= seniorAge) {
+                    isSeniorCitizen = true;
+                    System.out.println("\nYou qualify for a senior citizen discount of 10%.");
+                }
+
             }
 
             // Check for prescription
@@ -116,7 +129,6 @@ public class Orderingsystem {
                 if (additionalCostUnits > 0) {
                     itemName += "Additional Eye Grade Charge,";
                     itemPrice += String.valueOf(additionalCost) + ",";
-                    totalCost += additionalCost;
                 }
             }
 
@@ -321,6 +333,11 @@ public class Orderingsystem {
             String[] itemNamesArray = itemName.split(",");
             String[] itemPricesArray = itemPrice.split(",");
 
+            if (isSeniorCitizen) {
+                discountAmount = totalCost * seniorDiscountRate;
+                totalCost = totalCost - discountAmount;
+            }
+            
             // Display order summary
             if (confirmPurchaseFinal || eyeCheckService) {
                 System.out.printf("\n\n%90s\n\n", "EYE SEE YOU OPTICAL");
@@ -330,6 +347,9 @@ public class Orderingsystem {
                 System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
                 for (int i = 0; i < itemNamesArray.length; i++) {
                     System.out.printf("%-64s | %40sPhp\n", "\t\t" + itemNamesArray[i], itemPricesArray[i]);
+                }
+                if (isSeniorCitizen) {
+                    System.out.printf("\t\tSenior Citizen Discount (10%%):                                 |                                    -Php%.2f\n", discountAmount);
                 }
                 System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
                 System.out.printf("\t\tSubtotal: Php%.2f\n", totalCost);
