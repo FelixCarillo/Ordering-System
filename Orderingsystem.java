@@ -394,5 +394,6 @@ public class Orderingsystem {
                 System.out.println("\n\t\t\t\t\t\tNo items were purchased. Thank you for visiting EYE SEE YOU OPTICAL!\n");
             }
         }
+        }
     }
 }
