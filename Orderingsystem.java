@@ -25,6 +25,8 @@ public class Orderingsystem {
 
         double discountAmount = 0.0;
 
+        double change = 0.0;
+
         // Integers for choices
         int dashboardChoice = 0;
         String eyeglassChoice = "";
@@ -169,7 +171,8 @@ public class Orderingsystem {
                         if (eyeglasses.length % 3 != 0) {
                             System.out.println();
                         }
-
+                        
+                        System.out.print("Enter product ID: ");
                         eyeglassChoice = sc.next();
 
                         if (eyeglassChoice.startsWith("E") || eyeglassChoice.startsWith("e")) {
@@ -207,7 +210,8 @@ public class Orderingsystem {
                         if (contacts.length % 3 != 0) {
                             System.out.println();
                         }
-
+                        
+                        System.out.print("Enter product ID: ");
                         contactLensChoice = sc.next();
 
                         if (contactLensChoice.startsWith("C") || contactLensChoice.startsWith("c")) {
@@ -239,6 +243,7 @@ public class Orderingsystem {
                             System.out.println();
                         }
 
+                        System.out.print("Enter product ID: ");
                         accessoriesChoice = sc.next();
 
                         if (accessoriesChoice.startsWith("A") || accessoriesChoice.startsWith("a")) {
@@ -281,6 +286,7 @@ public class Orderingsystem {
                             System.out.println();
                         }
 
+                        System.out.print("Enter product ID: ");
                         String addOnSelection = sc.next();
 
                         if (addOnSelection.startsWith("D") || addOnSelection.startsWith("d")) {
@@ -343,24 +349,6 @@ public class Orderingsystem {
             
             // Display order summary
             if (confirmPurchaseFinal || (eyeCheckService && confirmPurchaseFinal)) {
-                System.out.printf("\n\n%90s\n\n", "EYE SEE YOU OPTICAL");
-                System.out.printf("Customer Name(%s): %s\n\n", customerName, customerAge);
-                System.out.printf("\n%88s\n\n", "Order Summary:\n");
-                System.out.printf("%-50s | %40s%n", "\t\t\t\tProduct Name", "Price");
-                System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-                for (int i = 0; i < itemNamesArray.length; i++) {
-                    System.out.printf("%-64s | %40sPhp\n", "\t\t" + itemNamesArray[i], itemPricesArray[i]);
-                }
-                if (isSeniorCitizen) {
-                    System.out.printf("\t\tSenior Citizen Discount (10%%):                                 |                                    -Php%.2f\n", discountAmount);
-                }
-                System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-                System.out.printf("\t\tSubtotal: Php%.2f\n", totalCost);
-                System.out.println("\t\tVAT(12%): Php" + String.format("%.2f", (totalCost * 0.12)));
-                System.out.printf("\t\tTotal Amount Due: Php%.2f\n\n", (totalCost + (totalCost * 0.12)));
-                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-                System.out.printf("%96s\n", "Thank you for your purchase!");
-                System.out.printf("%100s", "Take care of your eyes! See you soon!");
 
                 // Handle Payment
                 clearScreen();
@@ -384,10 +372,33 @@ public class Orderingsystem {
 
                 // handle change
                 if (paymentAmount >= amountDue) {
-                    double change = paymentAmount - amountDue;
+                    change = paymentAmount - amountDue;
                     System.out.printf("\nPayment accepted. Your change is: Php%.2f\n", change);
-                    System.out.println("\n\n\t\t\t\t\t\t   Thank you for shopping at EYE SEE YOU OPTICAL!\n");
                 }
+
+
+                System.out.printf("\n\n%90s\n\n", "EYE SEE YOU OPTICAL");
+                System.out.printf("Customer Name(%s): %s\n\n", customerName, customerAge);
+                System.out.printf("\n%88s\n\n", "Order Summary:\n");
+                System.out.printf("%-50s | %40s%n", "\t\t\t\tProduct Name", "Price");
+                System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                for (int i = 0; i < itemNamesArray.length; i++) {
+                    System.out.printf("%-64s | %40sPhp\n", "\t\t" + itemNamesArray[i], itemPricesArray[i]);
+                }
+                if (isSeniorCitizen) {
+                    System.out.printf("\t\tSenior Citizen Discount (10%%):                                 |                                    -Php%.2f\n", discountAmount);
+                }
+                System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                System.out.printf("\t\tSubtotal: Php%.2f\n", totalCost);
+                System.out.println("\t\tVAT(12%): Php" + String.format("%.2f", (totalCost * 0.12)));
+                System.out.printf("\t\tTotal Amount Due: Php%.2f\n\n", (totalCost + (totalCost * 0.12)));
+                System.out.println("\t\t Customer Payment: Php" + String.format("%.2f", paymentAmount));
+                System.out.printf("\t\t         Change: Php%.2f\n", change);
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                System.out.printf("%96s\n", "Thank you for your purchase!");
+                System.out.printf("%100s", "Take care of your eyes! See you soon!");
+
+                
 
             } if (!exitAppChoice && itemName.isEmpty()) {
                 System.out.println("\n\t\t\t\t\t\tNo items were purchased. Thank you for visiting EYE SEE YOU OPTICAL!\n");
